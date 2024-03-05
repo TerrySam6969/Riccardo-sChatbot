@@ -2,9 +2,8 @@ import pandas as pd
 import streamlit as st
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from pinecone import Pinecone
-import os
 
-pineconeAPIKey = os.environ.get("PINECONE_API_KEY")
+pineconeAPIKey = st.secrets["PINECONE_API_KEY"]
 
 def app():
     pc = Pinecone(api_key=pineconeAPIKey)

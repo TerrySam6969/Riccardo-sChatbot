@@ -1,25 +1,23 @@
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from pinecone import Pinecone
-
-from dotenv import load_dotenv
+import streamlit as st
 from langchain_google_genai import GoogleGenerativeAI
-import os
 
-load_dotenv()  # take environment variables from .env
-GoogleAPIKey = os.environ.get("GOOGLE_API_KEY")
+GoogleAPIKey = st.secrets["GOOGLE_API_KEY"]
 
 llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=GoogleAPIKey, temperature=0.1)
 
-pc = Pinecone(api_key='847c2b46-aa21-4d21-85de-c659bb6c8810')
+pineconeAPIKey = st.secrets["PINECONE_API_KEY"]
+
+pc = Pinecone(api_key=pineconeAPIKey)
 
 indexName = "riccardo"
 index = pc.Index(indexName)
 
 instructor_embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
 
-
 def Reply(question):
-    e = instructor_embeddings.embed_query("How do you suggest I put the sample on my resume? put a link to google drive?")
+    e = instructor_embeddings.embed_query(question)
 
     data = index.query(
     vector = e,
@@ -61,6 +59,7 @@ def Reply(question):
     try:
         # print(prompt_template)
         response = llm.invoke(prompt_template)
+
         return response
         
     except Exception as e:
