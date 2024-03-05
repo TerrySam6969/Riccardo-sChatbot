@@ -47,5 +47,8 @@ def app():
         # Delete rows from the original DataFrame
         reviewdf = reviewdf[~edited_df["Mark for Deletion"]]
         
+    # if st.button("Add to database", type="primary"):
+
+
 
 
