@@ -6,7 +6,7 @@ from langchain_google_genai import GoogleGenerativeAI
 import os
 
 load_dotenv()  # take environment variables from .env
-GoogleAPIKey = os.environ("GOOGLE_API_KEY")
+GoogleAPIKey = os.environ.get("GOOGLE_API_KEY")
 
 llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=GoogleAPIKey, temperature=0.1)
 
@@ -37,7 +37,7 @@ def Reply(question):
             if fetch:
                 text_part = fetch['vectors'][extracted_id]['metadata']['text']
                 text_parts.append(text_part)
-                print(text_part)  # Print the extracted text part
+                # print(text_part)  # Print the extracted text part
         except KeyError:
             print(f"ID '{extracted_id}' not found in the index.")
 
@@ -59,7 +59,7 @@ def Reply(question):
     """.format(context_part=text_parts, question=question)
 
     try:
-        print(prompt_template)
+        # print(prompt_template)
         response = llm.invoke(prompt_template)
         return response
         

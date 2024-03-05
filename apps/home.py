@@ -15,4 +15,3 @@ def app():
 
         st.header("Answer")
         st.text_area("Edit Response", response, height=100)
-        st.write(response)

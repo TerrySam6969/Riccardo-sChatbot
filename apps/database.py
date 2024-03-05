@@ -2,11 +2,12 @@ import pandas as pd
 import streamlit as st
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from pinecone import Pinecone
+import os
 
-
+pineconeAPIKey = os.environ.get("PINECONE_API_KEY")
 
 def app():
-    pc = Pinecone(api_key='847c2b46-aa21-4d21-85de-c659bb6c8810')
+    pc = Pinecone(api_key=pineconeAPIKey)
 
     instructor_embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
     indexName = "riccardo"
