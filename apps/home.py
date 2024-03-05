@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain_helper import Reply
+from apps.langchain_helper import Reply
 
 
 def app():

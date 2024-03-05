@@ -3,12 +3,12 @@ from pinecone import Pinecone
 
 from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAI
-
+import os
 
 load_dotenv()  # take environment variables from .env
+GoogleAPIKey = os.environ("GOOGLE_API_KEY")
 
-api_key = 'AIzaSyBuRJ9yWwRjFqC4GDHPg4OsTMEgxOVavcg' # get this free api key from https://makersuite.google.com/
-llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=api_key, temperature=0.1)
+llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=GoogleAPIKey, temperature=0.1)
 
 pc = Pinecone(api_key='847c2b46-aa21-4d21-85de-c659bb6c8810')
 

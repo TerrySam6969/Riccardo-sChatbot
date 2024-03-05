@@ -10,7 +10,9 @@ class MultiApp:
         def foo():
             st.title("Hello Foo")
         def bar():
-            st.title("Hello Bar")
+            st.title(import streamlit as st
+from langchain_helper import Reply
+from streamlit_option_menu import option_menu"Hello Bar")
         app = MultiApp()
         app.add_app("Foo", foo)
         app.add_app("Bar", bar)
